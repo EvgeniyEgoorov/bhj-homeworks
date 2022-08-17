@@ -1,35 +1,20 @@
-const back = document.querySelector(".slider__arrow_prev");
-const next = document.querySelector(".slider__arrow_next");
+const sliderItem = Array.from(document.querySelectorAll('.slider__item'));
+const sliderArrow = document.querySelectorAll('.slider__arrow');
+const sliderArrowPrev = document.querySelector('.slider__arrow_prev');
+const sliderArrowNext = document.querySelector('.slider__arrow_next');
 
-const photosArray = Array.from(document.querySelectorAll(".slider__item"));
-const dotsArray = Array.from(document.querySelectorAll(".slider__dot"));
-
-let currentSlide = 1;
-
-function removeActive() {
-    photosArray[currentSlide].className = "slider__item";
-}
-
-function addActive() {
-    photosArray[currentSlide].className = "slider__item_active";
-}
-
-next.onclick = function() {
-    removeActive();
-    currentSlide++;
-
-    if (currentSlide > photosArray.length - 1) {
-        currentSlide = 0;
+sliderArrow.forEach((item) => {
+  item.addEventListener('click', (event) => {
+    if(item.classList.contains('slider__arrow_prev')) {
+      let activeIndex = sliderItem.findIndex((value) => value.classList.contains('slider__item_active'));
+        sliderItem[activeIndex].classList.remove('slider__item_active');
+        activeIndex = (activeIndex == 0) ? (sliderItem.length - 1) : (activeIndex - 1);
+        sliderItem[activeIndex].classList.add('slider__item_active');
+    } else {
+      let activeIndex = sliderItem.findIndex((value) => value.classList.contains('slider__item_active'));
+        sliderItem[activeIndex].classList.remove('slider__item_active');
+        activeIndex = (activeIndex == sliderItem.length - 1) ? 0 : (activeIndex + 1);
+        sliderItem[activeIndex].classList.add('slider__item_active');
     }
-    addActive();
-};
-
-back.onclick = function() {
-    removeActive();
-    currentSlide--;
-
-    if (currentSlide < 0) {
-        currentSlide = photosArray.length - 1;
-    }
-    addActive();
-};
+  })
+})
