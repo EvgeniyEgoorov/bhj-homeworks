@@ -7,15 +7,16 @@ function showPopup() {
     popupLoad.classList.add("modal_active");
   }
 
-function closePopup() {for (let i = 0; i < closeModal.length; i++) {
-    let eachClose = closeModal[i];
+function closePopup() {
+    for (let i = 0; i < closeModal.length; i++) {
+        let eachClose = closeModal[i];
 
-    let closeFunc = () => {
-        wellDone.style.display = "none";
-        popupLoad.style.display = "none";
-    };
+        let closeFunc = () => {
+            wellDone.style.display = "none";
+            popupLoad.style.display = "none";
+        };
 
-    eachClose.onclick = closeFunc;
+        eachClose.onclick = closeFunc;
     }
 }
 
